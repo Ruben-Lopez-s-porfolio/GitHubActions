@@ -1,0 +1,16 @@
+name: Calling Reusable Workflows
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: "Input decription"
+        type: string
+        default: "Ali"
+        required: false
+jobs:
+  calling-a-resuable-wf:
+    uses: Reusable/workflows/.github/workflows/reusable.yaml@main
+    with:
+      name: ${{ inputs.name }}
+    secrets:
+      access-token: ${{ secrets.ACCESS_TOKEN }}
