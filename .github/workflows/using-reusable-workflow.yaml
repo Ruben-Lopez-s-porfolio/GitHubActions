@@ -1,16 +1,21 @@
 name: Calling Reusable Workflows
+
 on:
   workflow_dispatch:
     inputs:
       name:
-        description: "Input decription"
+        description: "Input description"
         type: string
         default: "Ali"
         required: false
+
 jobs:
-  calling-a-resuable-wf:
-    uses: Ruben-Lopez-s-porfolio/Reusable/.github/workflows/reusable.yaml@main
-    with:
-      name: ${{ inputs.name }}
-    secrets:
-      access-token: ${{ secrets.ACCESS_TOKEN }}
+  calling-a-reusable-wf:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Reusable Workflow
+        uses: Ruben-Lopez-s-porfolio/Reusable/.github/workflows/reusable.yaml@main
+        with:
+          name: ${{ github.event.inputs.name }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
